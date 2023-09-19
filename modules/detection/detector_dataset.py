@@ -24,10 +24,10 @@ class DetectorDataset:
 
     def combine_datasets(self, name="combined_metadata"):
         all_datapoints = []
+        image_id = 1
         for metadata in self.metadata_files:
             dataset = json.load(open(metadata))["annotations"]
             dataset = sorted(dataset, key=lambda x: x["file_name"])
-            image_id = 1
             for datapoint in dataset:
                 datapoint["file_name"] = "/".join(
                     metadata.split(os.sep)[:-2] + [datapoint["file_name"]]
