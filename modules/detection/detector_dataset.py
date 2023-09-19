@@ -115,7 +115,8 @@ class DetectorDataset:
                 ann["bbox_mode"] = BoxMode.XYXY_ABS
                 ann["bbox"] = ann["bbox"][0] + ann["bbox"][1]
                 ann["category_id"] = 0
-                ann["segmentation"] = [[int(v) for v in p] for p in ann["segmentation"]]
+                if "segmentation" in ann.keys():
+                    ann["segmentation"] = [[int(v) for v in p] for p in ann["segmentation"]]
 
             dataset_annotations.append(datapoint)
 
