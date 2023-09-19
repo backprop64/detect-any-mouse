@@ -93,7 +93,7 @@ class Detector:
         self.cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
 
         self.trainer = DefaultTrainer(self.cfg)
-        self.trainer.resume_or_load(resume=False)
+        self.trainer.resume_or_load(resume=True)
 
         self.trainer.train()
 
