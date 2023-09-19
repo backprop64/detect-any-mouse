@@ -557,7 +557,7 @@ def get_images_to_annotate(image_folder):
 def update_dataset_metadata(image_folder,new_annotations):
   metadata_path = os.path.join(image_folder,'metadata.json')
   for ann in new_annotations:
-    ann["file_name" ] = os.path.join(x["file_name"].split(os.sep)[-2],x["file_name"].split(os.sep)[-1])
+    ann["file_name" ] = os.path.join(ann["file_name"].split(os.sep)[-2],ann["file_name"].split(os.sep)[-1])
   if os.path.exists(metadata_path):
     annotations = json.load(open(metadata_path))['annotations']
     annotated_images = [x["file_name"].split(os.sep)[-1] for x in annotations]
