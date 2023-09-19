@@ -158,8 +158,8 @@ if __name__ == "__main__":
     parser.add_argument('--learning_rate', type=float, default=0.001, help='Learning rate for the optimizer (default: 0.001)')
     parser.add_argument('--weight_decay', type=float, default=0.001, help='Weight decay for the optimizer (default: 0.0)')
 
-    parser.add_argument('--train_ratio', type=float, help='Percentage of datapoints to use for training (default: 0.8)')
-    parser.add_argument('--test_ratio', type=float, help='Percentage of datapoints to use for testing (default: 0.2)')
+    parser.add_argument('--train_ratio', type=float, default=1.0, help='Percentage of datapoints to use for training (default: 0.8)')
+    parser.add_argument('--test_ratio', type=float, default=0.0, help='Percentage of datapoints to use for testing (default: 0.2)')
     parser.add_argument('--train', action='store_true',help='Percentage of datapoints to use for training (default: 0.8)')
     parser.add_argument('--test',action='store_true', help='Percentage of datapoints to use for training (default: 0.8)')
 
