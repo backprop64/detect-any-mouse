@@ -1,5 +1,4 @@
-# Rodent Tracking Toolbox
-
+# Detect Any Mouse
 Welcome to the Rodent Tracking Toolbox repository! This toolbox provides a set of tools and notebooks to assist you in rodent tracking tasks. Whether you need to perform zero-shot rodent tracking, annotate a dataset, or fine-tune a tracking model, this repository has you covered.
 
 ## Notebooks + Video Tutorial
