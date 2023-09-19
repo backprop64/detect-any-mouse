@@ -27,11 +27,13 @@ class DetectorDataset:
         for metadata in self.metadata_files:
             dataset = json.load(open(metadata))["annotations"]
             dataset = sorted(dataset, key=lambda x: x["file_name"])
-
+            image_id = 1
             for datapoint in dataset:
                 datapoint["file_name"] = "/".join(
                     metadata.split(os.sep)[:-2] + [datapoint["file_name"]]
                 )
+                datapoint["image_id"] = image_id
+                image_id += 1
                 all_datapoints.append(datapoint)
 
         merged_dataset = {"annotations": all_datapoints}
