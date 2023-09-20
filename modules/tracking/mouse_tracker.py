@@ -11,6 +11,13 @@ import csv
 from video_utils import add_padding, squarify_crop, save_cropped_video
 import glob
 
+def generate_random_pastel_color():
+    # Generate a random bright pastel color
+    r = random.randint(100, 255)
+    g = random.randint(100, 255)
+    b = random.randint(100, 255)
+    return (b, g, r)
+
 class MouseTracker:
     def __init__(
         self,
@@ -130,7 +137,8 @@ class MouseTracker:
         result = cv2.VideoWriter(
             visulization_path, cv2.VideoWriter_fourcc(*"MJPG"), 15, size
         )
-
+        color_map = {}
+        
         print("### visulizing_video ###")
         for i, det, tracks in tqdm(self.all_tracks):
             ret, frame = video.read()
@@ -147,16 +155,23 @@ class MouseTracker:
                 y1 = tracks[t][1]
                 x2 = tracks[t][2]
                 y2 = tracks[t][3]
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (36, 255, 12), 2)
 
-                id = str(tracks[t][4])
+                mouse_id = str(tracks[t][4])
+                if mouse_id in color_map.keys():
+                    color = color_map[mouse_id]
+                else:
+                    color = generate_random_pastel_color()
+                    color_map[mouse_id] = color
+
+
+                cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                 cv2.putText(
                     frame,
                     id,
                     (x1, y2),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
-                    (255, 255, 0),
+                    1,
+                    color,
                     2,
                     1,
                 )
