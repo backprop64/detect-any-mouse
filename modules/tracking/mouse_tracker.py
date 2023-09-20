@@ -10,6 +10,9 @@ import cv2
 import csv
 from video_utils import add_padding, squarify_crop, save_cropped_video
 import glob
+import random
+import warnings
+warnings.filterwarnings("ignore")
 
 def generate_random_pastel_color():
     # Generate a random bright pastel color
@@ -138,7 +141,7 @@ class MouseTracker:
             visulization_path, cv2.VideoWriter_fourcc(*"MJPG"), 15, size
         )
         color_map = {}
-        
+
         print("### visulizing_video ###")
         for i, det, tracks in tqdm(self.all_tracks):
             ret, frame = video.read()
