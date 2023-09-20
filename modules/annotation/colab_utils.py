@@ -27,6 +27,12 @@ from IPython.display import Javascript
 import numpy as np
 from PIL import Image
 
+import os
+import cv2
+import random
+import string
+from pathlib import Path
+
 from google.colab import output
 from google.colab.output import eval_js
 
@@ -570,3 +576,50 @@ def update_dataset_metadata(image_folder,new_annotations):
   
   print('you have annotated', len(annotations), 'images',len(get_images_to_annotate(image_folder)), 'unannotated images remaining!')
 
+def sample_frames_from_videos(input_path, output_path, num_frames_per_video):
+    # Create the output folder if it doesn't exist
+    Path(output_path).mkdir(parents=True, exist_ok=True)
+    # Get a list of video files from the input path
+    video_files = []
+    if os.path.isfile(input_path):
+        video_files.append(input_path)
+    elif os.path.isdir(input_path):
+        video_files = [os.path.join(input_path, file) for file in os.listdir(input_path) if file.endswith(('.mp4', '.avi', '.mkv', '.mov'))]
+
+    if not video_files:
+        print("No video files found in the input path.")
+        return
+
+    for video_file in video_files:
+        # Open the video file
+        cap = cv2.VideoCapture(video_file)
+
+        # Get the video name without extension
+        video_name = os.path.splitext(os.path.basename(video_file))[0]
+
+        # Create a list of frame numbers to sample randomly
+        frame_numbers = list(range(int(cap.get(cv2.CAP_PROP_FRAME_COUNT))))
+        random.shuffle(frame_numbers)
+        frame_numbers = frame_numbers[:num_frames_per_video]
+
+        # Sample frames and save them
+        frame_count = 0
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            if frame_count in frame_numbers:
+                # Generate a unique filename for the frame
+                frame_filename = f"{video_name}_frame_{frame_count:04d}.jpg"
+                frame_path = os.path.join(output_path, frame_filename)
+
+                # Save the frame
+                cv2.imwrite(frame_path, frame)
+
+            frame_count += 1
+
+            if frame_count >= max(frame_numbers):
+                break
+
+        cap.release()
