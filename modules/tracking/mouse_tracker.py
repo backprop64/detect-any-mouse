@@ -14,12 +14,16 @@ import random
 import warnings
 warnings.filterwarnings("ignore")
 
+
 def generate_random_pastel_color():
-    # Generate a random bright pastel color
-    r = random.randint(100, 255)
-    g = random.randint(100, 255)
-    b = random.randint(100, 255)
-    return (b, g, r)
+    pastel_colors = [
+        (255, 204, 204),  # Pastel Pink
+        (204, 255, 204),  # Pastel Green
+        (204, 204, 255),  # Pastel Blue
+        (255, 255, 204),  # Pastel Yellow
+        (204, 255, 255),  # Pastel Aqua
+    ]
+    return random.choice(pastel_colors)
 
 class MouseTracker:
     def __init__(
@@ -170,8 +174,8 @@ class MouseTracker:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                 cv2.putText(
                     frame,
-                    id,
-                    (x1, y2),
+                    mouse_id,
+                    (x1, y2 + 5),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     1,
                     color,
