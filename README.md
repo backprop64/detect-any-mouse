@@ -1,11 +1,12 @@
 # Detect Any Mouse
+A system for single/multi mouse tracking in complex enviornemnts.
 
 ## Notebooks + Video Tutorial
-### Zero-Shot Tracking [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qiTIqScLwH7kfp_o5Z1t7UBHNykMptE9?usp=sharing) 
+### Zero-Shot Tracking Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qiTIqScLwH7kfp_o5Z1t7UBHNykMptE9?usp=sharing) 
 
 **Description:**
 
-In this notebook, you can track mice in your own videos using our DAM (Detect-And-Track) system. To use it, you need to specify the maximum number of mice visible in any frame of the video. The inputs for this notebook are your videos, and the output is tracking data.
+In this notebook, you can track mice in your own videos using our DAM system. To use it, you need to specify the maximum number of mice visible in any frame of the video. The inputs for this notebook are your videos, and the output is tracking data.
 
 **Inputs:**
 - Your videos
@@ -15,7 +16,7 @@ In this notebook, you can track mice in your own videos using our DAM (Detect-An
 
 ---
 
-### Create Your Own Dataset  [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tVG6HvkxVKCKRzauVEhld3Jp7WZM8QK0?usp=sharing) 
+### Create Your Own Dataset Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tVG6HvkxVKCKRzauVEhld3Jp7WZM8QK0?usp=sharing) 
 
 **Description:**
 
@@ -30,7 +31,7 @@ In this notebook, you can create a custom dataset to fine-tune a mouse detector.
 
 ---
 
-### Fine-Tune A Model  [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing) 
+### Fine-Tune A Model Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing) 
 
 **Description:**
 
