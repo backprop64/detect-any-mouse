@@ -2,7 +2,7 @@
 A system for single/multi mouse tracking in complex enviornemnts.
 
 ## Notebooks + Video Tutorial
-### Zero-Shot Tracking Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qiTIqScLwH7kfp_o5Z1t7UBHNykMptE9?usp=sharing){:target="_blank"} 
+### Zero-Shot Tracking Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1qiTIqScLwH7kfp_o5Z1t7UBHNykMptE9?usp=sharing)
 
 **Description:**
 
@@ -16,7 +16,7 @@ In this notebook, you can track mice in your own videos using our DAM system. To
 
 ---
 
-### Create Your Own Dataset Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tVG6HvkxVKCKRzauVEhld3Jp7WZM8QK0?usp=sharing){:target="_blank"} 
+### Create Your Own Dataset Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tVG6HvkxVKCKRzauVEhld3Jp7WZM8QK0?usp=sharing)
 
 **Description:**
 
@@ -31,9 +31,7 @@ In this notebook, you can create a custom dataset to fine-tune a mouse detector.
 
 ---
 
-### Fine-Tune A Model Notebook <a href="https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing" target="_blank">![here](https://colab.research.google.com/assets/colab-badge.svg)</a>
-
-
+### Fine-Tune A Model Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing) 
 **Description:**
 
 In this notebook, you can fine-tune a mouse detector using the dataset you created in the previous notebook. Fine-tuning the detector will enhance tracking performance in your experimental setup. The input for this notebook is a dataset, and the output is a new detector along with its configuration, which you can use to track mice in videos.
