@@ -32,7 +32,7 @@ import cv2
 import random
 import string
 from pathlib import Path
-
+from tqdm import tqdm
 from google.colab import output
 from google.colab.output import eval_js
 
@@ -590,7 +590,8 @@ def sample_frames_from_videos(input_path, output_path, num_frames_per_video):
         print("No video files found in the input path.")
         return
 
-    for video_file in video_files:
+    for video_file in tqdm(video_files):
+        print('sampling from: ', video_file)
         # Open the video file
         cap = cv2.VideoCapture(video_file)
 
