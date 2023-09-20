@@ -31,7 +31,8 @@ In this notebook, you can create a custom dataset to fine-tune a mouse detector.
 
 ---
 
-### Fine-Tune A Model Notebook [![here](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing){:target="_blank"}
+### Fine-Tune A Model Notebook <a href="https://colab.research.google.com/drive/1dBdoQYvQSOWLwfVQ4k9Fs250RwDQQdcV?usp=sharing" target="_blank">![here](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 
 **Description:**
 
