@@ -502,21 +502,23 @@ def rescale_and_convert_bboxes(bboxes, image_path):
     # Initialize the annotations list
     annotations = []
     # Convert relative bounding boxes to absolute coordinates
-    for bbox in bboxes:
-        xmin, ymin, xmax, ymax = bbox
-        abs_bbox = [
-            [int(xmin * width), int(ymin * height)],
-            [int(xmax * width), int(ymax * height)]
-        ]
+    try:
+      for bbox in bboxes:
+          xmin, ymin, xmax, ymax = bbox
+          abs_bbox = [
+              [int(xmin * width), int(ymin * height)],
+              [int(xmax * width), int(ymax * height)]
+          ]
 
-        # Create the annotation dictionary for each bounding box
-        annotation = {
-            'bbox': abs_bbox,
-            'bbox_mode': 'BoxMode.XYXY_ABS',
-            'category_id': 0
-        }
-        annotations.append(annotation)
-
+          # Create the annotation dictionary for each bounding box
+          annotation = {
+              'bbox': abs_bbox,
+              'bbox_mode': 'BoxMode.XYXY_ABS',
+              'category_id': 0
+          }
+          annotations.append(annotation)
+    except:
+      pass
     # Create the final annotation dictionary with the file path, width, and height
     annotation_dict = {
         'file_name': image_path,
