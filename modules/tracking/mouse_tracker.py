@@ -47,8 +47,6 @@ class MouseTracker:
                 id = track.tolist()[-1]
                 if id > max_id:
                     max_id = id
-
-        print("max_ids:", max_id)
         all_trajectories = []
         for id in range(1, max_id + 1):
             trajectory = [t for t in merged_track_ids if t[4] == id]
@@ -61,7 +59,7 @@ class MouseTracker:
             mouse_id = data[0][-2]
             # Write the data to a CSV file
             filename = os.path.join(self.cfg.OUTPUT_DIR, f"mouse_{str(mouse_id)}_data.csv")
-            print(mouse_id, 'data saved to',filename )
+            print('mouse id', mouse_id, 'tracking data saved to',filename )
             with open(filename, "w", newline="") as csvfile:
                 csv_writer = csv.writer(csvfile)
                 csv_writer.writerow(headers)  # Write the headers as the first row
@@ -104,10 +102,9 @@ class MouseTracker:
     ):
         mot_tracker = Sort(max_age=25, min_hits=10, iou_threshold=0.3)  # max_age=50, min_hits=15, iou_threshold=0.5)
         video_path = video_path
-        print("collecting detections")
+        print("### analyzing video ###")
         detections = self.get_detections_video(video_path=video_path)
         self.all_tracks = []
-        print("collecting trajectories")
         for i, det in tqdm(enumerate(detections)):
             tracks = mot_tracker.update(det)
             self.all_tracks.append([i, det.astype(int), tracks.astype(int)])
@@ -134,7 +131,7 @@ class MouseTracker:
             visulization_path, cv2.VideoWriter_fourcc(*"MJPG"), 15, size
         )
 
-        print("visulizing_video")
+        print("### visulizing_video ###")
         for i, det, tracks in tqdm(self.all_tracks):
             ret, frame = video.read()
 
@@ -143,7 +140,7 @@ class MouseTracker:
                 y1 = det[t][1]
                 x2 = det[t][2]
                 y2 = det[t][3]
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (36, 10, 255), 1)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (36, 10, 255), 1)
 
             for t in range(tracks.shape[0]):
                 x1 = tracks[t][0]
@@ -172,7 +169,6 @@ class MouseTracker:
         cv2.destroyAllWindows()
 
     def visulize_action_cams(self, video_path, output_path):
-        print("visulizing_video")
         max_id = 0
         all_tracks = []
         for i, det, tracks in tqdm(self.all_tracks):
@@ -182,7 +178,6 @@ class MouseTracker:
                 if id > max_id:
                     max_id = id
 
-        print("max_id:", max_id)
         all_trajectories = []
         for id in range(1, max_id + 1):
             trajectory = [t for t in all_tracks if t[4] == id]
