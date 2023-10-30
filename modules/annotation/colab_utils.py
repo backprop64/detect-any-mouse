@@ -616,6 +616,7 @@ def sample_frames_from_videos(input_path, output_path, num_frames_per_video):
                 # Generate a unique filename for the frame
                 frame_filename = f"{video_name}_frame_{frame_count:04d}.jpg"
                 frame_path = os.path.join(output_path, frame_filename)
+                print('saved:', frame_path)
 
                 # Save the frame
                 cv2.imwrite(frame_path, frame)
