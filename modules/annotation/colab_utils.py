@@ -578,52 +578,51 @@ def update_dataset_metadata(image_folder,new_annotations):
   
   print('you have annotated', len(annotations), 'images',len(get_images_to_annotate(image_folder)), 'unannotated images remaining!')
 
-def sample_frames_from_videos(input_path, output_path, num_frames_per_video):
-    # Create the output folder if it doesn't exist
-    Path(output_path).mkdir(parents=True, exist_ok=True)
-    # Get a list of video files from the input path
-    video_files = []
-    if os.path.isfile(input_path):
-        video_files.append(input_path)
+def sample_frames_from_video_or_dir(input_path, output_path, num_frames_per_video):
+    if os.path.isfile(input_path) and input_path.endswith(('.mp4', '.avi', '.mkv')):
+        # Input is a single video file
+        sample_frames_from_video(input_path, output_path, num_frames_per_video)
     elif os.path.isdir(input_path):
-        video_files = [os.path.join(input_path, file) for file in os.listdir(input_path) if file.endswith(('.mp4', '.avi', '.mkv', '.mov'))]
+        # Input is a directory containing video files
+        video_files = find_video_files(input_path)
 
-    if not video_files:
-        print("No video files found in the input path.")
+        if not video_files:
+            print("No video files found in the directory.")
+        else:
+            print("Found the following video files:")
+            for video_file in video_files:
+                print(video_file)
+
+            for video_file in video_files:
+                sample_frames_from_video(video_file, output_path, num_frames_per_video)
+
+def find_video_files(directory):
+    video_files = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(('.mp4', '.avi', '.mkv')):
+                video_files.append(os.path.join(root, file))
+    return video_files
+
+def sample_frames_from_video(video_path, output_path, num_frames):
+    cap = cv2.VideoCapture(video_path)
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    if frame_count == 0:
+        print(f"Skipping {video_path}: No frames found.")
         return
 
-    for video_file in tqdm(video_files):
-        print('sampling from: ', video_file)
-        # Open the video file
-        cap = cv2.VideoCapture(video_file)
+    os.makedirs(output_path, exist_ok=True)
 
-        # Get the video name without extension
-        video_name = os.path.splitext(os.path.basename(video_file))[0]
+    for i in range(num_frames):
+        frame_number = random.randint(0, frame_count - 1)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+        ret, frame = cap.read()
 
-        # Create a list of frame numbers to sample randomly
-        frame_numbers = list(range(int(cap.get(cv2.CAP_PROP_FRAME_COUNT))))
-        random.shuffle(frame_numbers)
-        frame_numbers = frame_numbers[:num_frames_per_video]
+        if ret:
+            video_name = os.path.splitext(os.path.basename(video_path))[0]
+            frame_filename = f"{video_name}_frame_{frame_number}.jpg"
+            frame_outpath = os.path.join(output_path, frame_filename)
+            cv2.imwrite(frame_outpath, frame)
 
-        # Sample frames and save them
-        frame_count = 0
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
-
-            if frame_count in frame_numbers:
-                # Generate a unique filename for the frame
-                frame_filename = f"{video_name}_frame_{frame_count:04d}.jpg"
-                frame_path = os.path.join(output_path, frame_filename)
-                print('saved:', frame_path)
-
-                # Save the frame
-                cv2.imwrite(frame_path, frame)
-
-            frame_count += 1
-
-            if frame_count >= max(frame_numbers):
-                break
-
-        cap.release()
+    cap.release()
