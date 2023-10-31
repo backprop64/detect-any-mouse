@@ -504,7 +504,7 @@ def rescale_and_convert_bboxes(bboxes, image_path):
     # Convert relative bounding boxes to absolute coordinates
     try:
       for bbox in bboxes:
-          xmin, ymin, xmax, ymax = bbox
+          ymin, xmin, ymax, xmax = bbox
           abs_bbox = [
               [int(xmin * width), int(ymin * height)],
               [int(xmax * width), int(ymax * height)]
